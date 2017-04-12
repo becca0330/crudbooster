@@ -303,6 +303,7 @@ class CBController extends Controller {
 				foreach($columns_table as $col) {
 						if(!$col['field_with']) continue;
 						if($col['is_subquery']) continue;
+						if($col['type_data'] == 'datetime') continue;
 						$w->orwhere($col['field_with'],"like","%".Request::get("q")."%");
 				}
 			});
