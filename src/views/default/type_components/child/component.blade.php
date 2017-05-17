@@ -1,11 +1,13 @@
 <?php 
 	$name = str_slug($form['label'],'');
 ?>
+@push('bottom')
 <script type="text/javascript">
 	$(function() {
 		$('#form-group-{{$name}} .select2').select2();		
 	})
 </script>
+@endpush
 <div class='form-group {{$header_group_class}}' id='form-group-{{$name}}'>								
 	
 	@if($form['columns'])						
@@ -25,7 +27,11 @@
 							@foreach($form['columns'] as $col)	
 							<?php $name_column = $name.$col['name'];?>
 							<div class='form-group'>
-								<label class="control-label col-sm-2">{{$col['label']}}</label>
+								@if($col['type']!='hidden')
+								<label class="control-label col-sm-2">{{$col['label']}}
+								@if(!empty($col['required'])) <span class="text-danger" title="This field is required">*</span> @endif
+								</label>
+								@endif
 								<div class="col-sm-10">
 									@if($col['type']=='text')
 									<input id='{{$name_column}}' type='text' {{ ($col['max'])?"maxlength='$col[max]'":"" }} name='{{$col["name"]}}' class='form-control {{$col['required']?"required":""}}' 										
@@ -33,8 +39,15 @@
 										/>
 									@elseif($col['type']=='radio')
 										<?php 
-											if($col['dataenum']):												
-											foreach($col['dataenum'] as $e=>$enum):
+											if($col['dataenum']):
+                                            $dataenum = $col['dataenum'];
+                                            if(strpos($dataenum, ';') !== false) {
+                                                $dataenum = explode(";", $dataenum);
+                                            } else {
+                                                $dataenum = [$dataenum];
+                                            }
+                                            array_walk($dataenum, 'trim');
+											foreach($dataenum as $e=>$enum):
 												$enum = explode('|',$enum);
 												if(count($enum)==2) {
 													$radio_value = $enum[0];
@@ -58,8 +71,9 @@
 								      </span>
 								    </div><!-- /input-group -->
 
+								    @push('bottom')
 								    <script type="text/javascript">
-								    	var url_{{$name_column}} = "{{CRUDBooster::mainpath('modal-data')}}?table={{$col['datamodal_table']}}&columns=id,{{$col['datamodal_columns']}}&name_column={{$name_column}}&where={{urlencode($col['datamodal_where'])}}&select_to={{ urlencode($col['datamodal_select_to']) }}";
+								    	var url_{{$name_column}} = "{{CRUDBooster::mainpath('modal-data')}}?table={{$col['datamodal_table']}}&columns=id,{{$col['datamodal_columns']}}&name_column={{$name_column}}&where={{urlencode($col['datamodal_where'])}}&select_to={{ urlencode($col['datamodal_select_to']) }}&columns_name_alias={{urlencode($col['datamodal_columns_alias'])}}";
 								    	var url_is_setted_{{$name_column}} = false;
 								    	function showModal{{$name_column}}() {
 								    		if(url_is_setted_{{$name_column}} == false) {								    			
@@ -86,6 +100,7 @@
 											hideModal{{$name_column}}();
 										}
 								    </script>
+								    @endpush
 
 									<div id='modal-datamodal-{{$name_column}}' class="modal" tabindex="-1" role="dialog">
 									  <div class="modal-dialog {{ $col['datamodal_size']=='large'?'modal-lg':'' }} " role="document">
@@ -122,6 +137,7 @@
 								    </div>
 
 								    <input type="file" id='fake-upload-{{$name_column}}' style="display: none">
+								    @push('bottom')
 								    <script type="text/javascript">
 								    	var file;
 										var filename;
@@ -226,6 +242,7 @@
 										}
 
 								    </script>
+								    @endpush
 
 									@elseif($col['type']=='select')
 									<select id='{{$name_column}}' name='{{$col["name"]}}' class='form-control select2 {{$col['required']?"required":""}}' 										
@@ -236,7 +253,11 @@
 											if($col['datatable']) {
 												$tableJoin = explode(',',$col['datatable'])[0];
 												$titleField = explode(',',$col['datatable'])[1];
-												$data = CRUDBooster::get($tableJoin,NULL,"$titleField ASC");
+												if($col['datatable_where']) {													
+													$data = CRUDBooster::get($tableJoin,NULL,"$titleField ASC");
+												}else{
+													$data = CRUDBooster::get($tableJoin,$col['datatable_where'],"$titleField ASC");
+												}
 												foreach($data as $d) {
 													echo "<option value='$d->id'>".$d->$titleField."</option>";
 												}
@@ -255,6 +276,8 @@
 											}											
 										?>										
 									</select>
+									@elseif($col['type']=='hidden')
+										<input type="{{$col['type']}}" id="{{$name.$col["name"]}}" name="{{$name.$col["name"]}}" value="{{$col["value"]}}">
 									@endif
 
 									@if($col['help']) 
@@ -281,6 +304,7 @@
 										$formula = str_replace("[".$c['name']."]","\$('#".$name.$c['name']."').val()",$formula);
 									}									
 								?>
+								@push('bottom')
 								<script type="text/javascript">
 									function {{ $formula_function_name }}() {
 										var v = {!! $formula !!};
@@ -290,15 +314,18 @@
 										{!! $script_onchange !!}
 									})									
 								</script>
+								@endpush
 							@endif
 
 							@endforeach
 
+							@push('bottom')
 							<script type="text/javascript">
 								var currentRow = null;
 
 								function resetForm{{$name}}() {
 									$('#panel-form-{{$name}}').find("input[type=text],input[type=number],select,textarea").val('');
+									$('#panel-form-{{$name}}').find(".select2").val('').trigger('change');
 								}
 
 								function deleteRow{{$name}}(t) {
@@ -408,6 +435,7 @@
 									$('#btn-reset-form-{{$name}}').click();									
 								}
 							</script>
+							@endpush
 						</div>
 						<div class="panel-footer" align="right">
 							<input type='button' class='btn btn-default' id="btn-reset-form-{{$name}}" onclick="resetForm{{$name}}()" value='Reset Form'/>
