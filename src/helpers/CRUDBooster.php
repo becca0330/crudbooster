@@ -35,7 +35,7 @@ class CRUDBooster  {
 
 		public static function first($table,$id) {
 			$table = self::parseSqlTable($table)['table'];
-			if(is_int($id)) {
+			if(is_numeric($id) && filter_var($id, FILTER_VALIDATE_INT)) {
 				return DB::table($table)->where('id',$id)->first();
 			}elseif (is_array($id)) {
 				$first = DB::table($table);
