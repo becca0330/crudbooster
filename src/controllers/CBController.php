@@ -923,6 +923,7 @@ class CBController extends Controller {
 					$this->arr[$name] = $inputdata;
 				}else{
 					if(CB::isColumnNULL($this->table,$name) && $ro['type']!='upload') {
+						$this->arr[$name] = NULL;
 						continue;
 					}else{						
 						$this->arr[$name] = "";
