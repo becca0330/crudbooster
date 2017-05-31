@@ -54,3 +54,9 @@
 .login-page a:hover,.login-page a:active,.login-page a:focus {
     color: #ffe800;
 }
+
+@media screen and (max-width: 1400px) {
+    .login-box, .register-box {
+        margin: 7% auto;
+    }
+}
