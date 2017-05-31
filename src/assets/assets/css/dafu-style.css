@@ -1,0 +1,56 @@
+.login-page{
+	width: 1200px;
+	margin: 0 auto;
+	font-family: 'Microsoft YaHei New', 'Microsoft Yahei', '微软雅黑', STXihei, STHeiti, '华文细黑', 'Lantinghei SC', Lantinghei, 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, 'Arial Unicode MS', sans-serif;
+}
+
+.login-box, .register-box {
+    float: right;
+	margin: 16% auto;
+}
+.login-box-body {
+	box-shadow: none !important; 
+	background: transparent !important;; 
+	color: #b7b7b7 !important;
+}
+.login-box-body, .register-box-body {
+   background: none !important; 
+   padding: 0px !important;  
+   border-top: 0;
+   color: #b7b7b7 !important; 
+}
+
+.form-control{
+	height: 50px;
+	border-radius: 4px !important;
+}
+.form-control-feedback {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+}
+.has-feedback .form-control {
+    padding-left: 42.5px;
+}
+.login-box-body .form-control-feedback, .register-box-body .form-control-feedback {
+    color: #4741b6 !important;
+}
+.btn{
+	height: 50px;
+	border-radius: 4px !important;
+}
+.login-page .btn-primary{
+	background: #ffe800;
+    border: none;
+    color: #4741b6;
+    border-radius: 4px;
+}
+.login-page .btn-primary i{
+	display: none;
+}
+.login-page a{
+	color: #fff;
+}
+.login-page a:hover,.login-page a:active,.login-page a:focus {
+    color: #ffe800;
+}
