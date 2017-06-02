@@ -1,28 +1,35 @@
+/*Login-page*/
 .login-page{
-	width: 1200px;
-	margin: 0 auto;
-	font-family: 'Microsoft YaHei New', 'Microsoft Yahei', '微软雅黑', STXihei, STHeiti, '华文细黑', 'Lantinghei SC', Lantinghei, 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, 'Arial Unicode MS', sans-serif;
+    width: 1200px;
+    margin: 0 auto;
+    font-family: 'Microsoft YaHei New', 'Microsoft Yahei', '微软雅黑', STXihei, STHeiti, '华文细黑', 'Lantinghei SC', Lantinghei, 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, 'Arial Unicode MS', sans-serif;
 }
 
 .login-box, .register-box {
     float: right;
-	margin: 16% auto;
+    margin: 16% auto;
+}
+
+@media screen and (max-width: 1400px) {
+    .login-box, .register-box {
+        margin: 7% auto;
+    }
 }
 .login-box-body {
-	box-shadow: none !important; 
-	background: transparent !important;; 
-	color: #b7b7b7 !important;
+    box-shadow: none !important;
+    background: transparent !important;;
+    color: #b7b7b7 !important;
 }
 .login-box-body, .register-box-body {
-   background: none !important; 
-   padding: 0px !important;  
-   border-top: 0;
-   color: #b7b7b7 !important; 
+    background: none !important;
+    padding: 0px !important;
+    border-top: 0;
+    color: #b7b7b7 !important;
 }
 
 .form-control{
-	height: 50px;
-	border-radius: 4px !important;
+    height: 50px;
+    border-radius: 4px !important;
 }
 .form-control-feedback {
     position: absolute;
@@ -36,27 +43,108 @@
     color: #4741b6 !important;
 }
 .btn{
-	height: 50px;
-	border-radius: 4px !important;
+    height: 50px;
+    border-radius: 4px !important;
 }
 .login-page .btn-primary{
-	background: #ffe800;
+    background: #ffe800;
     border: none;
     color: #4741b6;
     border-radius: 4px;
 }
 .login-page .btn-primary i{
-	display: none;
+    display: none;
 }
 .login-page a{
-	color: #fff;
+    color: #fff;
 }
 .login-page a:hover,.login-page a:active,.login-page a:focus {
     color: #ffe800;
 }
 
-@media screen and (max-width: 1400px) {
-    .login-box, .register-box {
-        margin: 7% auto;
+.bg-yellow, .callout.callout-warning, .alert-warning, .label-warning, .modal-warning .modal-body {
+    background-color: transparent !important;
+    border: none;
+    text-align: center;
+    color: #ccc !important;
+}
+
+@media screen and (max-width: 1100px) {
+    .login-page {
+        width: 96%;
     }
+}
+
+@media screen and (max-width: 768px) {
+    .login-box, .register-box {
+        float: none;
+    }
+}
+
+/*Management-page*/
+body, .main-header .logo, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Microsoft YaHei New', 'Microsoft Yahei', '微软雅黑', STXihei, STHeiti, '华文细黑', 'Lantinghei SC', Lantinghei, 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, 'Arial Unicode MS', sans-serif;
+}
+
+.skin-blue-light .main-header .logo {
+    background-color: #381639;
+}
+
+.skin-blue-light .main-header .navbar {
+    background-color: #381639;
+}
+
+.skin-blue-light .user-panel > .info, .skin-blue-light .user-panel > .info > a {
+    color: #fff;
+}
+
+.text-success {
+    color: #00a65a;
+}
+
+.skin-blue-light .sidebar a {
+    color: #fff;
+}
+
+.skin-blue-light .sidebar-menu > li.header {
+    color: #333;
+    background: #FFE800;
+    border-bottom: 1px solid #e6d202;
+}
+
+.skin-blue-light .sidebar-menu > li:hover > a, .skin-blue-light .sidebar-menu > li.active > a {
+    color: #333;
+    background: #FFE800;
+}
+
+.skin-blue-light .content-wrapper, .skin-blue-light .main-footer {
+    border-left: none;
+}
+
+.content-wrapper, .right-side {
+    background-color: #f1f1f1;
+}
+
+.skin-blue-light .main-footer {
+    border-top-color: #e2e2e2;
+}
+
+.main-footer {
+    background: #f1f1f1;
+}
+
+.main-footer strong {
+    font-weight: normal;
+}
+
+.skin-blue-light .sidebar-menu > li > .treeview-menu {
+    background: #1a0e1b;
+}
+
+.skin-blue-light .treeview-menu > li > a {
+    color: #d2d6de;
+}
+
+.sidebar-menu .treeview-menu > li > a {
+    padding: 8px 5px 8px 25px;
 }
