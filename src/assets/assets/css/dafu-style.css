@@ -154,3 +154,7 @@ body, .main-header .logo, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .sidebar-menu .treeview-menu > li > a {
     padding: 8px 5px 8px 25px;
 }
+
+.skin-blue-light .wrapper, .skin-blue-light .main-sidebar, .skin-blue-light .left-side {
+    background-color: #000;
+}
