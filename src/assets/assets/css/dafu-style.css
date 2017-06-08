@@ -160,14 +160,6 @@ body, .main-header .logo, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     background-color: #381639;
 }
 
-a {
-    color: #381639 !important;
-}
-
-a:hover, a:active, a:focus {
-    color: #6b286d !important;
-}
-
 .btn-primary {
     background-color: #633265;
     border-color: #633265;
